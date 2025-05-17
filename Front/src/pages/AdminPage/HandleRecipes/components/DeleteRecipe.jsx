@@ -1,8 +1,14 @@
 import React, { useState } from "react";
 import toast from "../../../../utils/toast.js";
 import { deleteOneRecipe } from "../../../../api/adminApi.js";
+import { useErrorHandler } from "../../../../api/apiErrorHandler.js";
 
 const DeleteRecipe = ({ recipes, setRecipes }) => {
+  /**
+   * @hook
+   * hook pour la gestion d'erreur
+   */
+  const handleError = useErrorHandler(); // Hook de gestion d'erreurs
   const [recipeId, setRecipeId] = useState("");
   // ----------------- Formulaire de suppression de recette ----------------
   //fonction qui gère l'envoi du formulaire de suppression de recette
@@ -36,9 +42,11 @@ const DeleteRecipe = ({ recipes, setRecipes }) => {
           // Réinitialise la sélection
           setRecipeId("");
 
-          // Affiche un message de succès
+          // Affiche un message de succèsp
           toast.success("Recette supprimée avec succès !");
         } catch (error) {
+          handleError(error);
+
           // Gestion des erreurs côté client
           if (error.message) {
             try {
@@ -50,7 +58,7 @@ const DeleteRecipe = ({ recipes, setRecipes }) => {
               });
             } catch {
               // Si l'erreur ne peut pas être parsée, affiche un message générique
-              toast.error("Une erreur est survenue : " + error.message);
+              toast.error("Une erreur est survenue");
             }
           } else {
             // Si l'erreur est inconnue, affiche un message par défaut
@@ -61,7 +69,7 @@ const DeleteRecipe = ({ recipes, setRecipes }) => {
 
       // Fonction appelée si l'utilisateur annule la suppression
       onCancel: () => {
-        console.log("Suppression annulée");
+        toast.info("Suppression annulée");
       },
     });
   };
@@ -75,7 +83,7 @@ const DeleteRecipe = ({ recipes, setRecipes }) => {
           <div className="form-group">
             <label htmlFor="recipe_id">Liste de recettes</label>
             <select id="recipe_id" name="recipe_id" value={recipeId} onChange={(e) => setRecipeId(e.target.value)} required>
-              <option value="">Choisis l'oeuvre à supprimer dans la liste</option>
+              <option value="">Choisis la recette à supprimer dans la liste</option>
               {/*Map pour afficher le menu déroulant */}
               {recipes.map((recipe) => (
                 <option key={recipe.id} value={recipe.id}>

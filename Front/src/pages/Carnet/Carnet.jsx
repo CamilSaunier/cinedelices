@@ -25,6 +25,11 @@ import { useErrorHandler } from "../../api/apiErrorHandler.js";
  /* ---------------------------------------------------------------------------------------------- */
 
 const Carnet = ({ recipes }) => {
+  // ----------------- HOOK D'ERREUR-----------------
+  /**
+   * @hook
+   * hook pour la gestion d'erreur
+   */
   const handleError = useErrorHandler(); // Hook de gestion d'erreurs
 
   // ==================== ÉTATS ====================
@@ -81,7 +86,7 @@ const Carnet = ({ recipes }) => {
     loadGenres();
     loadCategory();
     loadMotions();
-  }, [handleError]);
+  }, []);
 
   // ==================== FILTRAGE DES FILMS PAR GENRE ====================
   const filteredMotions =
@@ -109,7 +114,7 @@ const Carnet = ({ recipes }) => {
         <div className="filter-container">
           <div className="logo-container" data-aos="fade-down">
             <span className="line"></span>
-            <img src="../../../assets/img/logo.webp" alt="Logo de Ciné Délices" className="logo" />
+            <img src="/images/logo.webp" alt="Logo de Ciné Délices" className="logo" />
             <span className="line"></span>
           </div>
           {/* ==================== FILTRES PAR CATÉGORIE DE PLAT ==================== */}

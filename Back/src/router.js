@@ -34,12 +34,14 @@ import userController from "./controllers/userController.js";
 // ─── Utilitaires ──────────────────────────────────────────────────────────────
 import upload from "./utils/multer.js";
 
-
 const router = Router();
 
 // ─── ROUTES RECETTES ──────────────────────────────────────────────────────────
 
 router.get("/recipes", recipeController.getAllRecipes);
+// pour l'erreur 404
+router.get("/recipes/search", recipeController.getRecipesBySearch);
+// pour l'erreur 500
 router.get("/recipes/search/:search", recipeController.getRecipesBySearch);
 router.get("/recipes/:id", validateIdParam, recipeController.getOneRecipe);
 router.post("/recipes", isAuthenticated, upload.single("picture"), validate(createRecipeSchema), recipeController.createOneRecipe);
@@ -55,8 +57,8 @@ router.get("/genres", genreController.getAllGenres);
 
 router.post("/user/register", validate(createUserSchema), userController.createOneUser);
 router.post("/refresh-token", userController.generateRefreshToken); //Permet de créer un nouvel access token si le refresh token existe toujours dans les cookies
-router.post("/user/login", limiter, validate(loginUserSchema), userController.login);
-router.post("/user/verify", limiter, isAuthenticated, validate(verifyUserSchema), userController.VerifyUser);
+router.post("/user/login", validate(loginUserSchema), userController.login);
+router.post("/user/verify", isAuthenticated, validate(verifyUserSchema), userController.VerifyUser);
 router.post("/user/logout", userController.logout); // on nettoie le cookie côté client donc pas besoin de middleware IsAuthenticated ici
 router.post("/user/forgotPassword", validate(forgotPasswordSchema), userController.forgotPassword);
 router.post("/user/resetPassword/:token", validate(resetUserPasswordSchema), userController.resetPassword);
@@ -71,8 +73,22 @@ router.delete("/admin/recipes/:id", validateIdParam, isAuthenticated, isAdmin, r
 router.post("/admin/ingredients", isAuthenticated, isAdmin, validate(createIngredientSchema), ingredientsController.createOneIngredient);
 router.delete("/admin/ingredients/:id", validateIdParam, isAuthenticated, isAdmin, ingredientsController.deleteOneIngredient);
 router.delete("/admin/motions/:id", validateIdParam, isAuthenticated, isAdmin, motionController.deleteOneMotion);
-router.patch("/admin/recipes/:id", isAuthenticated, isAdmin, upload.single("picture"), validate(updateRecipeSchema), recipeController.modifyOneRecipe);
-router.patch("/admin/motions/:id", isAuthenticated, isAdmin, upload.single("picture"), validate(updateMotionSchema), motionController.modifyOneMotion);
+router.patch(
+  "/admin/recipes/:id",
+  isAuthenticated,
+  isAdmin,
+  upload.single("picture"),
+  validate(updateRecipeSchema),
+  recipeController.modifyOneRecipe
+);
+router.patch(
+  "/admin/motions/:id",
+  isAuthenticated,
+  isAdmin,
+  upload.single("picture"),
+  validate(updateMotionSchema),
+  motionController.modifyOneMotion
+);
 // ─── ROUTES OEUVRES (MOTIONS) ─────────────────────────────────────────────────
 
 router.get("/motions", motionController.getAllMotions);

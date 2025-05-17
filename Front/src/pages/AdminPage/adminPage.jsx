@@ -21,10 +21,17 @@ import HandleIngredientsPage from "./HandleIngredients/HandleIngredientsPage.jsx
 import HandleUserPage from "./HandleUsers/HandleUserPage.jsx";
 import HandleMotionsPage from "./HandleMotions/HandleMotionsPage.jsx";
 import HandleRecipePage from "./HandleRecipes/HandleRecipePage.jsx";
+import { useErrorHandler } from "../../api/apiErrorHandler.js";
 
 // Définition du composant principal AdminPage
 // Il reçoit en props les recettes et leur setter
 const AdminPage = ({ recipes, setRecipes }) => {
+  // ----------------- HOOK D'ERREUR-----------------
+  /**
+   * @hook
+   * hook pour la gestion d'erreur
+   */
+  const handleError = useErrorHandler(); // Hook de gestion d'erreurs
   // ----------------- ÉTAT POUR STOCKER LES DONNÉES DE LA BDD -----------------
 
   /**
@@ -40,8 +47,12 @@ const AdminPage = ({ recipes, setRecipes }) => {
      * Appelée automatiquement à chaque changement de la prop `recipes`
      */
     const loadMotions = async () => {
-      const motionsData = await getAllMotions(); // Appel API
-      setMotionsList(motionsData); // Mise à jour du state avec les données récupérées
+      try {
+        const motionsData = await getAllMotions(); // Appel API
+        setMotionsList(motionsData);
+      } catch (error) {
+        handleError(error);
+      } // Mise à jour du state avec les données récupérées
     };
 
     loadMotions(); // Lancement de la fonction au montage
@@ -58,9 +69,9 @@ const AdminPage = ({ recipes, setRecipes }) => {
   // ----------------- RENDU DU COMPOSANT -----------------
   return (
     <>
-    {/* Balises qui seront intégrées dans le head */}
-    <title>Page d'administrateur | Ciné Délices</title>
-    <meta name="description" content="page d'administrateur" />
+      {/* Balises qui seront intégrées dans le head */}
+      <title>Page d'administrateur | Ciné Délices</title>
+      <meta name="description" content="page d'administrateur" />
 
       <div className="admin__page-container">
         {/* Barre de navigation latérale. setActiveForm permet de changer de formulaire */}

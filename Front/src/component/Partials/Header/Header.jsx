@@ -14,6 +14,7 @@ import { FaPowerOff } from "react-icons/fa";
 import { IoIosArrowForward } from "react-icons/io";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoMdClose } from "react-icons/io";
+import { useErrorHandler } from "../../../api/apiErrorHandler.js";
 
 /**
  * Composant Header du site.
@@ -24,6 +25,12 @@ import { IoMdClose } from "react-icons/io";
  */
 
 const Header = () => {
+  // ----------------- HOOK D'ERREUR-----------------
+  /**
+   * @hook
+   * hook pour la gestion d'erreur
+   */
+  const handleError = useErrorHandler(); // Hook de gestion d'erreurs
   // ----------------- GESTION DU MENU BURGER-----------------
   /**
    * État local qui gère l’ouverture/fermeture du menu burger.
@@ -70,8 +77,12 @@ const Header = () => {
    */
   const handleLogout = async () => {
     // Fait jouer la fonction logout du store
-    await logoutUser();
-    logout();
+    try {
+      await logoutUser();
+      logout();
+    } catch (error) {
+      handleError(error);
+    }
     navigate("/");
   };
 
@@ -90,7 +101,8 @@ const Header = () => {
       const foundRecipes = await getRecipeBySearch(search);
       // Si foundRecipes est falsy (ex: null), on envoie un tableau vide
       navigate("/search-results", { state: { filteredRecipes: foundRecipes || [] } });
-    } catch {
+    } catch (error) {
+      handleError(error);
       // En cas d'erreur (ex: API down), on navigue quand même avec un tableau vide
       navigate("/search-results", { state: { filteredRecipes: [] } });
     }
@@ -104,7 +116,7 @@ const Header = () => {
         <div className="navbar__items">
           <Link className="nav-link" to="/">
             <div className="header__branding">
-              <img src="../../../assets/img/logo.webp" alt="Logo de Ciné Délices" className="header__branding-logo" />
+              <img src="/images/logo.webp" alt="Logo de Ciné Délices" className="header__branding-logo" />
               <h1 className="header__branding-title">Ciné Délices</h1>
             </div>
           </Link>
@@ -112,8 +124,6 @@ const Header = () => {
             <form className="search_bar-form" onSubmit={handleSearch}>
               <input className="input" value={search} type="text" placeholder="Rechercher une recette" onChange={(e) => setSearch(e.target.value)} />
               <button aria-label="Rechercher" type="submit">
-             
-          
                 <IoIosArrowForward className="navbar-submit-icon" />
               </button>
             </form>
@@ -177,8 +187,7 @@ const Header = () => {
                 </li>
                 <li>
                   <button aria-label="Déconnexion" className="logout" onClick={handleLogout}>
-                  <FaPowerOff onClick={closeMenu} />
-               
+                    <FaPowerOff onClick={closeMenu} />
                   </button>
                 </li>
               </>

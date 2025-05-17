@@ -21,6 +21,12 @@ import { useErrorHandler } from "../../../api/apiErrorHandler.js";
  /* ---------------------------------------------------------------------------------------------- */
 
 const ProfilePage = () => {
+  // ----------------- HOOK D'ERREUR-----------------
+  /**
+   * @hook
+   * hook pour la gestion d'erreur
+   */
+  const handleError = useErrorHandler(); // Hook de gestion d'erreurs
   // ----------------- RÉCUPÉRATION DU TOKEN ET DÉCODAGE-----------------
 
   /** @const token - On récupère le Token JWT d’authentification stocké localement */
@@ -37,7 +43,6 @@ const ProfilePage = () => {
    */
   const { user, login, logout } = useUserStore();
   const navigate = useNavigate();
-  const handleError = useErrorHandler(); // Hook de gestion d'erreurs
 
   // SYNCHRONISATION DU PROFIL LOCAL AVEC LE STORE
 
@@ -107,7 +112,6 @@ const ProfilePage = () => {
       // on passe SetIsPasswordVerified à true ça permet de débloquer le formulaire d'édition dans le composant.
       setIsPasswordVerified(true);
     } catch (error) {
-      console.error(error);
       handleError(error); // Gérer l'erreur avec le hook
       toast.error(error.message);
     }
@@ -129,14 +133,11 @@ const ProfilePage = () => {
       //Appel à l'api Patch
       const modifiedUser = await modifyUser(decoded.userId, pseudo, email, newPassword);
 
-      // console.log(modifiedUser.token)
-
       // Mise à jour du store avec les nouvelles données
       login(modifiedUser.token);
 
       // Message de succès
       toast.success("Profil mis à jour avec succès !");
-      console.log(user);
 
       //Réinitialise les champs du formulaire
       setNewPassword("");
@@ -145,7 +146,6 @@ const ProfilePage = () => {
       setIsEditing(false);
       setIsPasswordVerified(false);
     } catch (error) {
-      console.error(error);
       handleError(error); // Gérer l'erreur avec le hook
       toast.error(error.message || "Erreur lors de la mise à jour du profil.");
     }
@@ -174,13 +174,12 @@ const ProfilePage = () => {
           logout();
           navigate("/");
         } catch (error) {
-          console.error(error);
           handleError(error); // Gérer l'erreur avec le hook
-          toast.error(error.message || "Erreur lors de la suppression du compte.");
+          toast.error(error || "Erreur lors de la suppression du compte.");
         }
       },
       onCancel: () => {
-        console.log("Suppression annulée");
+        toast.info("Suppression annulée");
       },
     });
   };
@@ -188,7 +187,6 @@ const ProfilePage = () => {
   // ----------------- RENDU -----------------
   return (
     <section className="section__my-profile" data-aos="fade-in">
-
       {/* Balises qui seront intégrées dans le head */}
       <title>{`${pseudo} | Ciné Délices`}</title>
       <meta name="description" content="Page de profil" />
@@ -196,7 +194,7 @@ const ProfilePage = () => {
       <div className="profile">
         <div className="profile-header">
           <h2 className="section-title profile-title">Mon Profil</h2>
-          <img src="../../../assets/img/serveuse.webp" alt="serveuse" className="profile-img" />
+          <img src="/images/serveuse.webp" alt="serveuse" className="profile-img" />
         </div>
         {!isEditing && (
           <div className="profile-overview">
@@ -242,7 +240,7 @@ const ProfilePage = () => {
             <div className="password-field">
               <label htmlFor="password">Nouveau mot de passe</label>
               <div className="control">
-                <input className="password-input" type={showPassword ? "text" : "password"} id="password" name="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} required placeholder="Nouveau mot de passe" />
+                <input className="password-input" type={showPassword ? "text" : "password"} id="password" name="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} placeholder="Nouveau mot de passe" />
                 <i className={`eye-icon ${showPassword ? "uil uil-eye-slash" : "uil uil-eye"}`} onClick={togglePasswordVisibility}></i>
               </div>
             </div>
@@ -259,7 +257,6 @@ const ProfilePage = () => {
                   name="confirmPassword"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
-                  required
                   placeholder="Confirmez votre mot de passe"
                 />
                 <i className={`eye-icon ${showConfirmPassword ? "uil uil-eye-slash" : "uil uil-eye"}`} onClick={toggleConfirmPasswordVisibility}></i>

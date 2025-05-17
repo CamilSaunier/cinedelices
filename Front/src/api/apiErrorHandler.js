@@ -5,20 +5,18 @@ import { useErrorBoundary } from "react-error-boundary";
  * @function useErrorHandler
  * @param {function} showBoundary - Fonction pour afficher la frontière d'erreur.
  * @param {Error} error - L'erreur à gérer.
- * @returns 
+ * @returns
  */
-
 
 // Définition d'un hook adapté à la gestion des erreurs
 export function useErrorHandler() {
   const { showBoundary } = useErrorBoundary();
 
   const handleError = (error) => {
-    console.error("Une erreur s'est produite", error);
+    const statusCode = error.response?.status || error.status || error.statusCode || 500;
 
-    // Si c'est une instance d'Error ET que le code HTTP est 500, on affiche la boundary
-    if (error instanceof Error && error.status === 500) {
-      showBoundary(error);
+    if (error instanceof Error && statusCode === 500) {
+      showBoundary(error); // maintenant ta page 500 s'affiche !
     }
   };
 

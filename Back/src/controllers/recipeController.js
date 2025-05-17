@@ -14,19 +14,13 @@ const recipeController = {
    * @async
    * @param {import('express').Request} req - Requête Express
    * @param {import('express').Response} res - Réponse Express
-   * @param {Function} next - Fonction middleware suivante
    * @returns {void}
    */
-  async getAllRecipes(req, res, next) {
+  async getAllRecipes(req, res) {
     // Récupération de toutes les recettes
     const recipes = await Recipe.findAll({
       // On utilise findAll pour récupérer toutes les recettes
-      include: [
-        { association: "motion", include: ["genres", "format"] },
-        { association: "author", attributes: ["pseudo"] },
-        { association: "category" },
-        { association: "difficulty" },
-      ],
+      include: [{ association: "motion", include: ["genres", "format"] }, { association: "author", attributes: ["pseudo"] }, { association: "category" }, { association: "difficulty" }],
       order: [["created_at", "ASC"]],
     });
 
@@ -159,9 +153,10 @@ const recipeController = {
    * @async
    * @param {import('express').Request} req - Requête Express
    * @param {import('express').Response} res - Réponse Express
+   * @param {Function} next - Fonction middleware suivante
    * @returns {Promise<void>}
    */
-  async modifyOneRecipe(req, res) {
+  async modifyOneRecipe(req, res, next) {
     // Ces deux lignes permettent d'obtenir __dirname dans un module ES6
     // __filename permet d'obtenir le chemin absolu du fichier actuel
     const __filename = fileURLToPath(import.meta.url);
@@ -257,6 +252,13 @@ const recipeController = {
     // Récupère le terme de recherche depuis les paramètres de l'URL
     const search = req.params.search;
 
+    // Vérifie que le paramètre search est bien présent et non vide
+    if (!search || search.trim() === "") {
+      const error = new Error("Aucun terme de recherche fourni");
+      error.statusCode = 404;
+      error.details = ["Veuillez saisir un mot-clé pour la recherche"];
+      return next(error);
+    }
     // Recherche dans les titres de recettes OU les titres de films associés avec une requête Sequelize
     const recipe = await Recipe.findAll({
       where: {
