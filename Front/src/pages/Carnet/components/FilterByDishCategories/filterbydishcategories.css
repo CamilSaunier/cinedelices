@@ -26,9 +26,8 @@
 }
 
 .dish__category-icon {
-  font-size: 8rem;
+  font-size: 6rem;
   color: var(--blue-dark);
-
   padding: 1.5rem;
   border-radius: 25%;
   margin-bottom: 1rem;

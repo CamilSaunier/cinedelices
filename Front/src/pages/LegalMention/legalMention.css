@@ -1,6 +1,7 @@
 .box_legal_mention {
   padding: 1.5em;
   width: 80%;
+  margin: auto;
 }
 
 .box_legal_mention:hover {
