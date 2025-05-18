@@ -29,7 +29,7 @@ function Home({ recipes }) {
         <section className="section__presentation has-text-centered">
           <div className="container" data-aos="zoom-in">
             <div className="box">
-              <h2 className="section__presentation-title ">test</h2>
+              <h2 className="section__presentation-title ">Mon précieux ...repas</h2>
               <p className="section__presentation-text">
                 Pour les amoureux de la bobine, les grands enfants, et tous ceux qui ont besoin d’un peu de fantasy dans leur assiette : ici, on
                 recrée les recettes cultes du cinéma, les sérieuses comme les complètement barrées. Le but ? Kiffer. Et bien manger, évidemment. Une
