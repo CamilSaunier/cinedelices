@@ -14,6 +14,7 @@ export function useErrorHandler() {
 
   const handleError = (error) => {
     const statusCode = error.response?.status || error.status || error.statusCode || 500;
+    console.log("handleError statusCode:", statusCode, "error:", error);
 
     if (error instanceof Error && statusCode === 500) {
       showBoundary(error); // maintenant ta page 500 s'affiche !

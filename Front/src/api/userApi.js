@@ -31,7 +31,8 @@ export async function createUser(pseudo, email, password) {
   // on vérifie que l'on a une réponse positive
   if (!response.ok) {
     const error = new Error(user?.details?.[0] || "Erreur lors de la connexion");
-    error.response = response; //  on attache le status
+    error.response = response;
+    error.status = response.status; //  on attache le status
     throw error;
   }
   // Renvoie le user créé si tout va bien
@@ -91,16 +92,17 @@ export async function loginUser(email, password) {
   });
   // Si la réponse est un code de status 429 (rate limit), on la gère spécifiquement
   if (response.status === 429) {
-    // La réponse du backend contient un message d'erreur en texte brut ou JSON
-    const errorText = "Trop de tentatives, veuillez réessayer dans 15 minutes.";
-    throw new Error(errorText); // On lance l'erreur avec le message du backend
+    const error = new Error("Trop de tentatives, veuillez réessayer dans 15 minutes.");
+    error.status = 429; // <== Ajout important
+    throw error;
   }
   // Si la réponse est OK, on essaye de la parser en JSON
   const user = await response.json();
   // on vérifie que l'on a une réponse positive
   if (!response.ok) {
     const error = new Error(user?.details?.[0] || "Erreur lors de la connexion");
-    error.response = response; //  on attache le status
+    error.response = response;
+    error.status = response.status; //  on attache le status
     throw error;
   }
   // Renvoie le user loggé si tout va bien
@@ -147,6 +149,7 @@ export async function verifyUser(password) {
   });
   // Si la réponse est OK, on essaye de la parser en JSON
   const result = await response.json();
+
   // on véifie que l'on ai une réponse positive
   if (!response.ok) {
     const error = new Error(result?.details?.[0] || "Erreur lors de la connexion");

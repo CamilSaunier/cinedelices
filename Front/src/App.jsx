@@ -76,10 +76,9 @@ function App() {
 
   return (
     <>
-      <Header />
-
       <main>
         <ScrollToTop />
+
         <Routes>
           {/* Routes accessibles à tous */}
           <Route path="/" element={<Home recipes={recipes} />} />
@@ -110,7 +109,6 @@ function App() {
           {/* on met ici notre page 404 personnalisé comme élément */}
         </Routes>
       </main>
-      <Footer />
     </>
   );
 }

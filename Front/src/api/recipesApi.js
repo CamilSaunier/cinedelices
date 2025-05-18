@@ -42,7 +42,9 @@ export async function getRecipeById(id) {
   // on vérifie que la réponse est valide
   // on vérifie que l'on a une réponse
   if (!response.ok) {
-    throw new Error("Erreur lors de la récupération des recettes");
+    const error = new Error(recipe?.details?.[0] || "Erreur lors de la récupération des recettes");
+    error.status = response.status; // Ajoute le code HTTP ici
+    throw error;
   }
   // on renvoie les données
   return recipe;

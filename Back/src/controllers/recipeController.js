@@ -20,7 +20,12 @@ const recipeController = {
     // Récupération de toutes les recettes
     const recipes = await Recipe.findAll({
       // On utilise findAll pour récupérer toutes les recettes
-      include: [{ association: "motion", include: ["genres", "format"] }, { association: "author", attributes: ["pseudo"] }, { association: "category" }, { association: "difficulty" }],
+      include: [
+        { association: "motion", include: ["genres", "format"] },
+        { association: "author", attributes: ["pseudo"] },
+        { association: "category" },
+        { association: "difficulty" },
+      ],
       order: [["created_at", "ASC"]],
     });
 
