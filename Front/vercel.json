@@ -1,0 +1,16 @@
+{
+  "rewrites": [
+    {
+      "source": "/robots.txt",
+      "destination": "https://cinedelices-w9c7.onrender.com/robots.txt"
+    },
+    {
+      "source": "/sitemap.xml",
+      "destination": "https://cinedelices-w9c7.onrender.com/sitemap.xml"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}

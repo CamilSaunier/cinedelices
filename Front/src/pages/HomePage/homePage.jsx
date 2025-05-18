@@ -16,9 +16,8 @@ function Home({ recipes }) {
 
   return (
     <>
-
       {/* Balises qui seront intégrées dans le head */}
-     <title>Accueil | Ciné Délices</title>
+      <title>Accueil | Ciné Délices</title>
       <meta name="description" content="Bienvenue sur Cinédélice, un sitede recettes inspirées du cinéma" />
       <meta name="keywords" content="Ciné délices, recettes, cinéma, cuisine, films" />
 
@@ -32,8 +31,9 @@ function Home({ recipes }) {
             <div className="box">
               <h2 className="section__presentation-title ">Mon précieux ...repas</h2>
               <p className="section__presentation-text">
-                Pour les amoureux de la bobine, les grands enfants, et tous ceux qui ont besoin d’un peu de fantasy dans leur assiette : ici, on recrée les recettes cultes du cinéma, les sérieuses comme les complètement barrées. Le but ? Kiffer. Et
-                bien manger, évidemment. Une idée de plat inspiré d’un film ? Lance-toi, cuisine-la, et partage-la avec tous les autres fous de la pellicule !
+                Pour les amoureux de la bobine, les grands enfants, et tous ceux qui ont besoin d’un peu de fantasy dans leur assiette : ici, on
+                recrée les recettes cultes du cinéma, les sérieuses comme les complètement barrées. Le but ? Kiffer. Et bien manger, évidemment. Une
+                idée de plat inspiré d’un film ? Lance-toi, cuisine-la, et partage-la avec tous les autres fous de la pellicule !
               </p>
               <Link className="button__catalog button mt-3" to="/carnet">
                 Voir le catalogue
