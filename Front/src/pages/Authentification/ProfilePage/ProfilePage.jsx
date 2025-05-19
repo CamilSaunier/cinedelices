@@ -168,7 +168,7 @@ const ProfilePage = () => {
 
     toast.confirmAction({
       title: "Suppression du compte",
-      message: "Etes vous sur de vouloir suprimer votre compte ?",
+      message: "Etes vous sur de vouloir supprimer votre compte ?",
       onConfirm: async () => {
         try {
           const removedMe = await deleteMe(user.id);
