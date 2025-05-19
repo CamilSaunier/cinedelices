@@ -13,6 +13,8 @@ import { deleteMe, modifyUser, verifyUser } from "../../../api/index.js";
 import { useUserStore } from "../../../store/store.js";
 import { useNavigate } from "react-router-dom";
 import { useErrorHandler } from "../../../api/apiErrorHandler.js";
+//React Icons
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 /** ----------------------------------------------------------------------------------------------
  *  @description Page de profil utilisateur, permettant de visualiser et modifier ses informations personnelles.
@@ -70,13 +72,16 @@ const ProfilePage = () => {
   const [pseudo, setPseudo] = useState(decoded.pseudo || "");
   const [email, setEmail] = useState(decoded.email || "");
   const [currentPassword, setCurrentPassword] = useState("");
+
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   // États pour afficher ou masquer les mots de passe
+
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   // ------------------ VISIBILITÉ DU MOT DE PASSE ------------------
+
   /**
    * @function togglePasswordVisibility
    * Fonction pour inverser la visisbilité du Password
@@ -214,6 +219,7 @@ const ProfilePage = () => {
           <form className="password-verification" onSubmit={handleVerifyPassword}>
             <label htmlFor="password-validation">Pour modifier vos informations, veuillez confirmer votre mot de passe :</label>
             <input name="password-validation" type="password" placeholder="Mot de passe actuel" value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} />
+
             <div className="profile-actions">
               <button className="btn" type="submit">
                 Valider
@@ -241,7 +247,9 @@ const ProfilePage = () => {
               <label htmlFor="password">Nouveau mot de passe</label>
               <div className="control">
                 <input className="password-input" type={showPassword ? "text" : "password"} id="password" name="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} placeholder="Nouveau mot de passe" />
-                <i className={`eye-icon ${showPassword ? "uil uil-eye-slash" : "uil uil-eye"}`} onClick={togglePasswordVisibility}></i>
+                <span className="eye-icon" onClick={togglePasswordVisibility}>
+                  {showPassword ? <FaEyeSlash /> : <FaEye />}
+                </span>
               </div>
             </div>
 
@@ -259,7 +267,9 @@ const ProfilePage = () => {
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   placeholder="Confirmez votre mot de passe"
                 />
-                <i className={`eye-icon ${showConfirmPassword ? "uil uil-eye-slash" : "uil uil-eye"}`} onClick={toggleConfirmPasswordVisibility}></i>
+                <span className="eye-icon" onClick={toggleConfirmPasswordVisibility}>
+                  {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+                </span>
               </div>
             </div>
 
