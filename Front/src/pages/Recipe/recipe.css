@@ -33,6 +33,7 @@
 
 .text_recipe {
   font-size: var(--fs-normal-size);
+  line-height: 2rem;
 }
 
 .card {
