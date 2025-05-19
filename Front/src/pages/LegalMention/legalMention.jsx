@@ -1,7 +1,9 @@
 import React from "react";
 import "./legalMention.css";
+import { useNavigate } from "react-router-dom";
 
 const LegalMention = () => {
+  const navigate = useNavigate();
   return (
     <div>
       {/* Balises qui seront intégrées dans le head */}
@@ -9,7 +11,7 @@ const LegalMention = () => {
       <meta name="description" content="Mention légales et charte de bonne conduite de Ciné Délices" />
       <meta name="keywords" content="Ciné délices, mention légales, contact, charte" />
 
-      <section className="section__presentation">
+      <section className="section__presentation section_legal_mention">
         <div className="box box_legal_mention">
           <h1 className="section__presentation-title legal_mention_main-title">Mentions légales</h1>
           <h2 className="section__presentation-title legal_mention_title">Contact</h2>
@@ -89,6 +91,12 @@ const LegalMention = () => {
             <li>- Prendre toute autre mesure nécessaire pour préserver l'intégrité et la sécurité de la communauté.</li>
           </ul>
           <p>Toute sanction fera l’objet d’un examen préalable par l’équipe de modération.</p>
+        </div>
+
+        <div className="button-center">
+          <button className="button-return-catalog btn" onClick={() => navigate(-1)}>
+            Retour
+          </button>
         </div>
       </section>
     </div>
