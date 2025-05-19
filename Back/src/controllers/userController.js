@@ -206,6 +206,7 @@ const userController = {
       sameSite: process.env.NODE_ENV === "production" ? "none" : "lax", // Protéger contre les attaques CSRF (cross-site request forgery)
       maxAge: 7 * 24 * 60 * 60 * 1000, // Expiration dans 7 jours
     });
+    console.log("Cookie envoyé :", res.getHeader("Set-Cookie"));
     // Réponse avec un message de succès, l'ID de l'utilisateur et son nouveau token
     res.status(200).json({ message: "Utilisateur modifié avec succès", token: newAccessToken });
   },
