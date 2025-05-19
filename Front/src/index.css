@@ -302,11 +302,11 @@ textarea {
 /* -------------------- */
 @media (min-width: 1000px) {
   :root {
-    --fs-section-title: 3.5rem;
+    --fs-section-title: 3rem;
     --fs-container-title: 2.5rem;
     --fs-subtitle: 2rem;
-    --fs-normal-size: 1.5rem;
-    --fs-small-size: 1.2rem;
+    --fs-normal-size: 1.2rem;
+    --fs-small-size: 1.1rem;
     --fs-smaller-size: 0.9rem;
   }
 
