@@ -1,5 +1,6 @@
 // On importe une fonction utilitaire pour vérifier qu'un nombre est bien un entier positif
 import { isPositiveInteger } from "../utils/validator.js";
+console.log("je suis dans le middleware is positive integer");
 
 // Ce middleware permet de valider que le paramètre "id" dans l'URL est un entier positif.
 // Par exemple, il est utile pour des routes comme GET /users/:id ou DELETE /posts/:id

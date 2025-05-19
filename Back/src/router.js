@@ -73,24 +73,8 @@ router.delete("/admin/recipes/:id", validateIdParam, isAuthenticated, isAdmin, r
 router.post("/admin/ingredients", isAuthenticated, isAdmin, validate(createIngredientSchema), ingredientsController.createOneIngredient);
 router.delete("/admin/ingredients/:id", validateIdParam, isAuthenticated, isAdmin, ingredientsController.deleteOneIngredient);
 router.delete("/admin/motions/:id", validateIdParam, isAuthenticated, isAdmin, motionController.deleteOneMotion);
-router.patch(
-  "/admin/recipes/:id",
-  validateIdParam,
-  isAuthenticated,
-  isAdmin,
-  upload.single("picture"),
-  validate(updateRecipeSchema),
-  recipeController.modifyOneRecipe
-);
-router.patch(
-  "/admin/motions/:id",
-  validateIdParam,
-  isAuthenticated,
-  isAdmin,
-  upload.single("picture"),
-  validate(updateMotionSchema),
-  motionController.modifyOneMotion
-);
+router.patch("/admin/recipes/:id", validateIdParam, isAuthenticated, isAdmin, upload.single("picture"), validate(updateRecipeSchema), recipeController.modifyOneRecipe);
+router.patch("/admin/motions/:id", validateIdParam, isAuthenticated, isAdmin, upload.single("picture"), validate(updateMotionSchema), motionController.modifyOneMotion);
 // ─── ROUTES OEUVRES (MOTIONS) ─────────────────────────────────────────────────
 
 router.get("/motions", motionController.getAllMotions);

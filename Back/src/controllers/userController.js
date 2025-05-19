@@ -223,6 +223,7 @@ const userController = {
    * @returns {Promise<void>}
    */
   async deleteOneUser(req, res, next) {
+    console.log("je suis là");
     // on récupère l'ID de l'utilisateur depuis les paramètres de la requête
     const userId = req.params.id;
     // Vérifie si l'utilisateur avec cet ID existe dans la base

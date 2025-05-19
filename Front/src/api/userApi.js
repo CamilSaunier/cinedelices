@@ -262,7 +262,10 @@ export async function resetPassword(newPassword, confirm, token) {
   // Si la réponse est OK, on essaye de la parser en JSON
   const data = await response.json();
   if (!response.ok) {
-    throw new Error(data?.details?.[0] || "Erreur lors de la réinitialisation du mot de passe");
+    const error = new Error(data?.details?.[0] || "Erreur lors de la connexion");
+    error.response = response;
+    error.status = response.status; //  on attache le status
+    throw error;
   }
   return data;
 }
@@ -278,7 +281,7 @@ export async function resetPassword(newPassword, confirm, token) {
 export async function deleteMe(id) {
   // on effectue la requête DELETE vers la route parrametrer en back et l'id
   // on précise la methode et le contenue du hearder avec le token
-  const response = await fetch(`${API_URL}/user/${id}`, {
+  const response = await authFetch(`${API_URL}/user/${id}`, {
     method: "DELETE",
     credentials: "include",
   });

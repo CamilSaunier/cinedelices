@@ -1,5 +1,5 @@
 import { verifyJwtToken } from "../utils/crypto.js";
-
+console.log("je suis dans le middleware is authenticated");
 /**
  * Vérifie que l'utilisateur est authentifié via JWT.
  * @param {import('express').Request} req
