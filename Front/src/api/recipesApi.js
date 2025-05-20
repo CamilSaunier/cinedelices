@@ -88,6 +88,10 @@ export async function createRecipes(formData) {
  */
 
 export async function getRecipeBySearch(search) {
+  if (!search?.trim()) {
+    // on retourne un tableau vide ou on gère ça autrement
+    return [];
+  }
   // on fait la demande API avec la route paramétrée du back, le mot rechercher
   const response = await fetch(`${API_URL}/recipes/search/${search}`);
   // on récupère la réponse de l'API (ici les recettes trouvées avec le mot recherché)
