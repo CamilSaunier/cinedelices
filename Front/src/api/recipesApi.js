@@ -95,7 +95,8 @@ export async function getRecipeBySearch(search) {
   // on vérifie que l'on a une réponse
   if (!response.ok) {
     const error = new Error(foundRecipes?.details?.[0] || "Erreur lors de la connexion");
-    error.response = response; //  on attache le status
+    error.response = response;
+    error.status = response.status; //  on attache le status
     throw error;
   }
 
