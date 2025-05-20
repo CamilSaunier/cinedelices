@@ -3,7 +3,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import toast from "../../../utils/toast.js";
 import { resetPassword } from "../../../api/userApi.js";
 import { useErrorHandler } from "../../../api/apiErrorHandler.js";
-// import { resetPassword } from '../../api/index'; // À décommenter quand tu as une vraie API
+//React-icon
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const ResetPassword = () => {
   // ----------------- HOOK D'ERREUR-----------------
@@ -68,13 +69,17 @@ const ResetPassword = () => {
           <div className="form-group">
             <label htmlFor="newPassword">Nouveau mot de passe</label>
             <input type={showPassword ? "text" : "password"} name="newPassword" id="newPassword" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} required placeholder="Entrez un nouveau mot de passe" />
-            <i className={`eye-icon ${showPassword ? "uil uil-eye-slash" : "uil uil-eye"}`} onClick={togglePasswordVisibility}></i>
+            <span className="eye-icon" onClick={togglePasswordVisibility}>
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </span>
           </div>
 
           <div className="form-group">
             <label htmlFor="confirmPassword">Confirmez le mot de passe</label>
             <input type={showConfirmPassword ? "text" : "password"} name="confirm" id="confirmPassword" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required placeholder="Confirmez le mot de passe" />
-            <i className={`eye-icon ${showConfirmPassword ? "uil uil-eye-slash" : "uil uil-eye"}`} onClick={toggleConfirmPasswordVisibility}></i>
+            <span className="eye-icon" onClick={toggleConfirmPasswordVisibility}>
+              {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+            </span>
           </div>
 
           <button type="submit" className="btn">
