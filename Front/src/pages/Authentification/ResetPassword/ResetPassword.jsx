@@ -67,8 +67,8 @@ const ResetPassword = () => {
         <h2 className="section-title form-title">Réinitialisation du mot de passe</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="newPassword">Nouveau mot de passe</label>
-            <input type={showPassword ? "text" : "password"} name="newPassword" id="newPassword" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} required placeholder="Entrez un nouveau mot de passe" />
+            <label htmlFor="password">Nouveau mot de passe</label>
+            <input type={showPassword ? "text" : "password"} name="newPassword" id="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} required placeholder="Entrez un nouveau mot de passe" />
             <span className="eye-icon" onClick={togglePasswordVisibility}>
               {showPassword ? <FaEyeSlash /> : <FaEye />}
             </span>
