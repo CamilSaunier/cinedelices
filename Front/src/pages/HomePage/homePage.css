@@ -17,7 +17,7 @@
 /*=================================== SECTION PRÉSENTATION =======================================*/
 
 .section__presentation {
-  line-height: 2rem;
+  padding: 2rem;
 }
 .section__presentation .box {
   background-color: var(--blue-dark);
