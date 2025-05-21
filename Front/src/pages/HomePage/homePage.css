@@ -35,7 +35,8 @@
 }
 
 .section__presentation-text {
-  font-size: var(--fs-submit-title);
+  font-size: var(--fs-normal-size);
+  line-height: 1.7rem;
 }
 
 .button__catalog {
