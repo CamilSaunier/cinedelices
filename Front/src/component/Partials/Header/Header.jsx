@@ -104,6 +104,7 @@ const Header = () => {
       navigate("/search-results", {
         state: {
           filteredRecipes: foundRecipes || [],
+          motion: foundRecipes.map((recipe) => recipe.motion.title),
         },
       });
     } catch (error) {
