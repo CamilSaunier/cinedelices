@@ -99,7 +99,7 @@ const Header = () => {
 
     try {
       const foundRecipes = await getRecipeBySearch(search.toLowerCase());
-      console.log(foundRecipes);
+
       // Si foundRecipes est falsy (ex: null), on envoie un tableau vide
       navigate("/search-results", {
         state: {
