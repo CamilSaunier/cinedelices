@@ -38,7 +38,7 @@ const Recipe = () => {
 
   // ==================== GESTION DU CHARGEMENT ====================
   if (isLoading) {
-    return <div className="loader"></div>; // Ou ton propre composant de loader
+    return <div className="loader"></div>;
   }
 
   // ==================== GESTION ERREUR / 404 ====================
