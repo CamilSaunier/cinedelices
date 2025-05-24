@@ -51,7 +51,7 @@ const SearchResultPage = () => {
 
             <div className="recipe__container result-container">
               {filteredRecipes.map((recipe, index) => (
-                <RecipeCard recipe={recipe} key={index} />
+                <RecipeCard recipe={recipe} key={index} motion={motion} />
               ))}
             </div>
             <button className="button-return-catalog btn" onClick={() => navigate(-1)}>
