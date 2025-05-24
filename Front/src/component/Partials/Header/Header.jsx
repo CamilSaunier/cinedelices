@@ -99,8 +99,13 @@ const Header = () => {
 
     try {
       const foundRecipes = await getRecipeBySearch(search);
+      console.log(foundRecipes);
       // Si foundRecipes est falsy (ex: null), on envoie un tableau vide
-      navigate("/search-results", { state: { filteredRecipes: foundRecipes || [] } });
+      navigate("/search-results", {
+        state: {
+          filteredRecipes: foundRecipes || [],
+        },
+      });
     } catch (error) {
       handleError(error);
       // En cas d'erreur (ex: API down), on navigue quand même avec un tableau vide

@@ -73,6 +73,7 @@ const Recipe = () => {
 
           <div className="anecdote card" data-aos="fade-down">
             <h3 className="card_title">{recipe.title}</h3>
+
             <p className="text_recipe">{recipe.description}</p>
           </div>
 
