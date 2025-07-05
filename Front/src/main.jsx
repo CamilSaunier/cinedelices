@@ -10,14 +10,14 @@ import Header from "./component/Partials/Header/Header.jsx";
 // resetKeys={[location.pathname]}> = reset l'erreur quand l'URL change
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <BrowserRouter>
-    <Header />
-      <ErrorBoundary FallbackComponent={ErrorPage} resetKeys={[location.pathname]}>
-       
-        <App />
-    
-      </ErrorBoundary>
-      <Footer />
-    </BrowserRouter>
-  </StrictMode>
+  <BrowserRouter>
+    <ErrorBoundary FallbackComponent={ErrorPage}>
+      <Header />
+    </ErrorBoundary>
+    <ErrorBoundary FallbackComponent={ErrorPage} resetKeys={[location.pathname]}>
+      <App />
+    </ErrorBoundary>
+    <Footer />
+  </BrowserRouter>
+</StrictMode>
 );
