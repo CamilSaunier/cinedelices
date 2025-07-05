@@ -81,7 +81,7 @@ const Header = () => {
       await logoutUser();
       logout();
     } catch (error) {
-      handleError(error);
+     console.error("Erreur lors de la déconnexion :", error);
     }
     navigate("/");
   };

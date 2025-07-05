@@ -11,9 +11,7 @@ import Header from "./component/Partials/Header/Header.jsx";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
   <BrowserRouter>
-    <ErrorBoundary FallbackComponent={ErrorPage}>
-      <Header />
-    </ErrorBoundary>
+    <Header />
     <ErrorBoundary FallbackComponent={ErrorPage} resetKeys={[location.pathname]}>
       <App />
     </ErrorBoundary>
