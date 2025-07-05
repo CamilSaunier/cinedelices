@@ -25,12 +25,7 @@ import { useErrorHandler } from "../../../api/apiErrorHandler.js";
  */
 
 const Header = () => {
-  // ----------------- HOOK D'ERREUR-----------------
-  /**
-   * @hook
-   * hook pour la gestion d'erreur
-   */
-  const handleError = useErrorHandler(); // Hook de gestion d'erreurs
+
   // ----------------- GESTION DU MENU BURGER-----------------
   /**
    * État local qui gère l’ouverture/fermeture du menu burger.
