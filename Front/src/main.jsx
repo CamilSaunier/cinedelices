@@ -11,11 +11,13 @@ import Header from "./component/Partials/Header/Header.jsx";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
+    <Header />
       <ErrorBoundary FallbackComponent={ErrorPage} resetKeys={[location.pathname]}>
-        <Header />
+       
         <App />
-        <Footer />
+    
       </ErrorBoundary>
+      <Footer />
     </BrowserRouter>
   </StrictMode>
 );
