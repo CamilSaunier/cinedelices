@@ -212,7 +212,7 @@ const ModifyMotionForm = ({ motionsList }) => {
 
         {image && (
   <figure id="motion_img">
-    <img src={${API_URL}/${image}} alt={title} />
+    <img src={`${API_URL}/${image}`} alt={title} />
   </figure>
 )}
 
