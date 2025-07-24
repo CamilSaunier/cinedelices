@@ -128,6 +128,7 @@ const AddMotionForm = () => {
   const addGenreField = () => {
     setGenresList([...genresList, { motion_genre_id: "" }]);
   };
+  
   const handleGenreChange = (index, value) => {
     const updatedGenres = [...genresList];
     updatedGenres[index] = { motion_genre_id: parseInt(value) };

@@ -6,6 +6,8 @@ import ErrorPage from "./pages/500/ErrorPage.jsx";
 import { ErrorBoundary } from "react-error-boundary";
 import Footer from "./component/Partials/Footer/Footer.jsx";
 import Header from "./component/Partials/Header/Header.jsx";
+
+
 function Root() {
   const location = useLocation();
   return (

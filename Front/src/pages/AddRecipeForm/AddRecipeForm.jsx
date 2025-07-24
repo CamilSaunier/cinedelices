@@ -122,6 +122,8 @@ const AddRecipeForm = ({ setRecipes }) => {
    * @param  value - la nouvelle valeur saisie par l'utilisateur pour ce champ
    */
 
+
+
   const handleIngredientChange = (index, field, value) => {
     //On crée une nouvelle liste : parcours la liste d'ingrédients
     const updatedIngredients = [...ingredientsList];

@@ -14,7 +14,7 @@ import { FaPowerOff } from "react-icons/fa";
 import { IoIosArrowForward } from "react-icons/io";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoMdClose } from "react-icons/io";
-import { useErrorHandler } from "../../../api/apiErrorHandler.js";
+// import { useErrorHandler } from "../../../api/apiErrorHandler.js";
 
 /**
  * Composant Header du site.
@@ -103,7 +103,8 @@ const Header = () => {
         },
       });
     } catch (error) {
-      handleError(error);
+      console.error("Erreur lors de la recherche :", error);
+      // handleError(error);
       // En cas d'erreur (ex: API down), on navigue quand même avec un tableau vide
       navigate("/search-results", { state: { filteredRecipes: [] } });
     }
